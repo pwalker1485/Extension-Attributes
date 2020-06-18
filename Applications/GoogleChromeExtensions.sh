@@ -5,8 +5,8 @@
 ########################################################################
 
 # Grabbed this from https://www.jamf.com/jamf-nation/discussions/11307/chrome-extension-reporting
-# Has slight amendments to filter out Google stock extensions and a few different results based
-# on install status of Chrome/extensions installed etc
+# Has slight amendments to filter out Google stock extensions
+# Added legacy Google Search extension to exclusions
 
 ########################################################################
 #                            Variables                                 #
@@ -15,7 +15,7 @@
 # Get the logged in user
 loggedInUser=$(stat -f %Su /dev/console)
 # Extension exclusions (Google stock extensions)
-chromeExclusions="Chrome Media Router • pkedcjkdefgpdelpbcmbmeomcjbeemfm\|• aapocclcgogkmnckokdopfmhonfmgoek\|• aohghmighlieiainnegkcijnfilokake\|• apdfllckaahabafndbhieahigkjlhalf\|• blpcfgokakmgnkcojhhkbfbldkacnbeo\|• felcaaldnbdncclmgdcncolpebgiejap\|• ghbmnnjooekpmoecnnnilnnbdlolhkhi\|• nmmhkkegccagdldgiimedpiccmgmieda\|• pjkljhegncpnkpknbcohdijeoejaedia"
+chromeExclusions="Chrome Media Router • pkedcjkdefgpdelpbcmbmeomcjbeemfm\|• aapocclcgogkmnckokdopfmhonfmgoek\|• aohghmighlieiainnegkcijnfilokake\|• apdfllckaahabafndbhieahigkjlhalf\|• blpcfgokakmgnkcojhhkbfbldkacnbeo\|• felcaaldnbdncclmgdcncolpebgiejap\|• ghbmnnjooekpmoecnnnilnnbdlolhkhi\|• nmmhkkegccagdldgiimedpiccmgmieda\|• pjkljhegncpnkpknbcohdijeoejaedia\|Google Search • coobgpohoikkiipiblmjeljniedjpjpf"
 
 ########################################################################
 #                            Functions                                 #
