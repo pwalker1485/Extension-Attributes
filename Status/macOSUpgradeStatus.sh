@@ -5,6 +5,7 @@
 ################## Written by Phil Walker Sept 2019 ####################
 ########################################################################
 # Modified June 2020
+# Modified Sep 2020
 
 ########################################################################
 #                            Variables                                 #
@@ -20,8 +21,8 @@ noLoADBundle="/Library/Security/SecurityAgentPlugins/NoMADLoginAD.bundle"
 macOSInstaller="/Applications/Install macOS Catalina.app"
 # Required disk space
 requiredSpace="15"
-# OS version
-osShort=$(/usr/bin/sw_vers -productVersion | awk -F. '{print $2}')
+# OS version - amended to account for Big Sur
+osShort=$(SYSTEM_VERSION_COMPAT=1 /usr/bin/sw_vers -productVersion | awk -F. '{print $2}')
 
 ########################################################################
 #                         Script starts here                           #
@@ -31,11 +32,11 @@ osShort=$(/usr/bin/sw_vers -productVersion | awk -F. '{print $2}')
 if [[ "$osShort" -eq "12" ]]; then
 	freeSpace=$(/usr/sbin/diskutil info / | grep "Available Space" | awk '{print $4}')
 else
-  freeSpace=$(/usr/sbin/diskutil info / | grep "Free Space" | awk '{print $4}')
+  	freeSpace=$(/usr/sbin/diskutil info / | grep "Free Space" | awk '{print $4}')
 fi
 
 if [ -z "$freeSpace" ]; then
-  freeSpace="5"
+	freeSpace="5"
 fi
 
 # Confirm there is enough disk space for the upgrade
@@ -70,14 +71,14 @@ if [[ "$osShort" -eq "14" ]]; then
 	fi
 fi
 
-if [[ "$osShort" -ge "15" ]]; then
-  echo "<result>Not Required</result>"
+if [[ "$osShort" -ge "15" ]] || [[ "$osShort" -eq "15" ]]; then
+	echo "<result>Not Required</result>"
 elif [[ "$osShort" -le "11" ]] || [[ "$osShort" -eq "13" ]]; then
-  if [[ "$spaceStatus" == "OK" ]] && [[ "$catalinaInstaller" == "Found" ]]; then
-    echo "<result>Upgrade Ready</result>"
-  else
-    echo "<result>Disk space:${freeSpace}GB | Installer:${catalinaInstaller}</result>"
-  fi
+  	if [[ "$spaceStatus" == "OK" ]] && [[ "$catalinaInstaller" == "Found" ]]; then
+    	echo "<result>Upgrade Ready</result>"
+  	else
+    	echo "<result>Disk space:${freeSpace}GB | Installer:${catalinaInstaller}</result>"
+  	fi
 fi
 
 exit 0
