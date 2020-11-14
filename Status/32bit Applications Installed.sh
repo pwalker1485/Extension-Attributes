@@ -22,7 +22,8 @@ if ! is-at-least "$catalinaOS" "$osVersion"; then
 kMDItemKind == 'Application'" | grep -v "/System/Library/Input Methods/InkServer.app" | grep -v "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd32.app" | \
 grep -v "/Volumes" | grep -v "OneDrive - Bauer Media Group")
 else
-    thirtyTwoBitApps=$(/usr/bin/mdfind "kMDItemExecutableArchitectures == 'i386' && kMDItemExecutableArchitectures != 'x86_64' && kMDItemKind == 'Application'")
+    thirtyTwoBitApps=$(/usr/bin/mdfind "kMDItemExecutableArchitectures == 'i386' && kMDItemExecutableArchitectures != 'x86_64' && kMDItemKind == 'Application'"  | \
+grep -v "/Volumes" | grep -v "OneDrive - Bauer Media Group")
 fi
 
 ########################################################################
