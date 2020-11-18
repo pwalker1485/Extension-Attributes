@@ -4,8 +4,8 @@
 #                   FileVault Status (On or Off)                       #
 ########################################################################
 
-FV2Stat=$(fdesetup status | awk '{print $3}' | sed 's/\.//g')
+fvStatus=$(fdesetup status | awk '/FileVault is/{print $3}' | tr -d .)
 
-echo "<result>$FV2Stat</result>"
+echo "<result>$fvStatus</result>"
 
 exit 0
