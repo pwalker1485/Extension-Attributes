@@ -5,9 +5,8 @@
 ################### written by Phil Walker Nov 2020 ####################
 ########################################################################
 
+installStatus="Not Installed"
 if [[ -e "/usr/local/outset/outset" ]]; then
-    echo "<result>Installed</result>"
-else
-    echo "<result>Not Installed</result>"
+    installStatus="Installed"
 fi
-exit 0
+echo "<result>${installStatus}</result>"
