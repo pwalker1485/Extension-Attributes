@@ -16,12 +16,16 @@ userList=$(dscl . -list /Users | grep -v "^_\|daemon\|nobody\|root")
 #                         Script starts here                           #
 ########################################################################
 
-echo "<result>"
 for user in ${(f)userList}; do
     # Get users SecureToken Staus
     secureTokenStatus=$(sysadminctl -secureTokenStatus "$user" 2>&1)
     if [[ "$secureTokenStatus" =~ "ENABLED" ]]; then
-        echo "${user}: SecureToken Found"
+        secureTokenUsers+=($user)
     fi
 done
-echo "</result>"
+if [[ -z "${secureTokenUsers[@]}" ]]; then
+    echo "<result>No Users</result>"
+else
+    echo "<result>${secureTokenUsers[@]}</result>"
+fi
+exit 0
