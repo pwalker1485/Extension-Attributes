@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ########################################################################
-#                     Bootstrap Token Status - EA                      #
+#                 Bootstrap Token Escrow Status - EA                   #
 ################### written by Phil Walker Nov 2020 ####################
 ########################################################################
 
@@ -23,9 +23,9 @@ autoload is-at-least
 if is-at-least "$catalinaOS" "$osVersion"; then
 	bootstrapToken=$(profiles status -type bootstraptoken | awk '/escrowed/{print $7}')
 	if [[ "$bootstrapToken" == "YES" ]]; then
-		tokenStatus="Yes"
+		tokenStatus="Escrowed"
 	else
-		tokenStatus="No"
+		tokenStatus="Not Escrowed"
 	fi
 else
 	tokenStatus="OS Not Supported"
