@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 ########################################################################
 #           Current Jamf Pro Server URL - Extension Attribute          #
@@ -9,16 +9,16 @@
 #                            Variables                                 #
 ########################################################################
 
-#JSS URL
+# JSS URL
 jamfProURL="Your Jamf Pro URL"
-#Get the current JSS url from the Jamf plist
+# Get the current JSS url from the Jamf plist
 currentURL=$(defaults read /Library/Preferences/com.jamfsoftware.jamf.plist jss_url)
 
 ########################################################################
 #                         Script starts here                           #
 ########################################################################
 
-if [[ $jamfProURL =~ "$currentURL" ]]; then 
+if [[ "$jamfProURL" == "$currentURL" ]]; then 
     echo "<result>URL Correct</result>"
 else
     echo "<result>$currentURL</result>"
