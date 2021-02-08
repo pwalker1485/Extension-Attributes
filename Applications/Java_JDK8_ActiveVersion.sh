@@ -10,7 +10,7 @@
 #                            Variables                                 #
 ########################################################################
 
-jdkCheck=$(find /Library/Java/JavaVirtualMachines/ -iname "*jdk*" -maxdepth 1 | awk 'END {print NR}')
+jdkCheck=$(find /Library/Java/JavaVirtualMachines -iname "*jdk*" -maxdepth 1 | awk 'END {print NR}')
 
 ########################################################################
 #                         Script starts here                           #
