@@ -10,7 +10,8 @@
 ########################################################################
 
 # Check if the Jamf Recurring Check-In Launch Daemon is permanently disabled
-launchDaemonCheck=$(defaults read /var/db/com.apple.xpc.launchd/disabled.plist | grep "= 1" | grep "com.jamfsoftware.task.Every")
+launchDaemonCheck=$(defaults read /var/db/com.apple.xpc.launchd/disabled.plist | grep "= 1" | grep "com.jamfsoftware.task.Every 30 Minutes") # On-Prem JSS
+#launchDaemonCheck=$(defaults read /var/db/com.apple.xpc.launchd/disabled.plist | grep "= 1" | grep "com.jamfsoftware.task.Every 15 Minutes") # Cloud JSS
 
 ########################################################################
 #                         Script starts here                           #
