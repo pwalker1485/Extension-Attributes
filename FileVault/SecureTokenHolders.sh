@@ -2,8 +2,9 @@
 
 ########################################################################
 #                      Secure Token Status - EA                        #
-################### written by Phil Walker Nov 2020 ####################
+################### written by Phil Walker Apr 2020 ####################
 ########################################################################
+# Edit Mar 2021
 
 ########################################################################
 #                            Variables                                 #
@@ -23,9 +24,9 @@ for user in ${(f)userList}; do
         secureTokenUsers+=($user)
     fi
 done
-if [[ -z "${secureTokenUsers[@]}" ]]; then
+if [[ -z "${(@)secureTokenUsers}" ]]; then
     echo "<result>No Users</result>"
 else
-    echo "<result>${secureTokenUsers[@]}</result>"
+    echo "<result>$(printf '%s\n' "${(@)secureTokenUsers}")</result>"
 fi
 exit 0
