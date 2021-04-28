@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ########################################################################
-#     Current active version of Oracle Java Development Kit - EA       #
+#          Current active version of Java Development Kit - EA         #
 ################## Written by Phil Walker June 2019 ####################
 ########################################################################
 # Edit Jan 2021
