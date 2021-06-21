@@ -7,6 +7,7 @@
 # Modified June 2020
 # Modified Sep 2020
 # Modified Oct 2020
+# Modified June 2021
 
 ########################################################################
 #                            Variables                                 #
@@ -16,8 +17,8 @@
 loggedInUser=$(stat -f %Su /dev/console)
 # Check the logged in user has a local account (for 10.12 MacBooks only)
 mobileAccount=$(dscl . -read /Users/"$loggedInUser" OriginalNodeName 2>/dev/null)
-# Path to NoMAD Login AD bundle
-noLoADBundle="/Library/Security/SecurityAgentPlugins/NoMADLoginAD.bundle"
+# Path to Jamf Connect Login bundle
+jclBundle="/Library/Security/SecurityAgentPlugins/JamfConnectLogin.bundle"
 # Installer location
 macOSInstaller="/Applications/Install macOS Catalina.app"
 # Required disk space
@@ -36,30 +37,26 @@ freeSpace=$(/usr/sbin/diskutil info / | grep "Free Space" | awk '{print $4}')
 if [[ -z "$freeSpace" ]]; then
 	freeSpace="5"
 fi
-
 # Confirm there is enough disk space for the upgrade
 if [[ ${freeSpace%.*} -ge ${requiredSpace} ]]; then
 	spaceStatus="OK"
 fi
-
 # Confirm the installer is available
 if [[ -d "$macOSInstaller" ]]; then
 	catalinaInstaller="Found"
 else
 	catalinaInstaller="Not Found"
 fi
-
 # Get account status of logged in user (Local or Mobile)
 if [[ "$mobileAccount" == "" ]]; then
 	accountStatus="Local"
 else
 	accountStatus="Mobile"
 fi
-
 # Upgrade Status
 autoload is-at-least
 if ! is-at-least "$targetOS" "$osVersion"; then
-	if [[ -d "$noLoADBundle" ]] && [[ "$accountStatus" == "Local" ]]; then
+	if [[ -d "$jclBundle" ]] && [[ "$accountStatus" == "Local" ]]; then
 		if [[ "$spaceStatus" == "OK" ]] && [[ "$catalinaInstaller" == "Found" ]]; then
       		echo "<result>Upgrade Ready</result>"
     	else
@@ -71,5 +68,4 @@ if ! is-at-least "$targetOS" "$osVersion"; then
 else
 	echo "<result>Not Required</result>"
 fi
-
 exit 0
